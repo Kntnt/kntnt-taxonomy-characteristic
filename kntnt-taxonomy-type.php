@@ -5,7 +5,7 @@
  * @wordpress-plugin
  * Plugin Name:       Kntnt Taxonomy Types
  * Plugin URI:        https://www.kntnt.com/
- * Description:       Provides the `type` taxonomy whose terms are used to indicate the character of a post (e.g. feature, review, or tutorial). 
+ * Description:       Provides the `type` taxonomy whose terms are used to indicate type of content (e.g. feature, review, or tutorial).
  * Version:           1.0.3
  * Author:            Thomas Barregren
  * Author URI:        https://www.kntnt.com/
