@@ -16,20 +16,19 @@
 
 namespace Kntnt\Type;
 
-
-defined( 'ABSPATH' ) && new Taxonomy;
+defined( 'ABSPATH' ) && new Taxonomy();
 
 
 class Taxonomy {
 
 	public function __construct() {
-		add_action( 'init', [ $this, 'run' ] );
+		add_action( 'init', array( $this, 'run' ) );
 	}
 
 	public function run() {
 
 		$slug       = apply_filters( 'kntnt_taxonomy_type_slug', 'type' );
-		$post_types = apply_filters( 'kntnt_taxonomy_type_objects', [ 'post' ] );
+		$post_types = apply_filters( 'kntnt_taxonomy_type_objects', array( 'post' ) );
 
 		register_taxonomy( $slug, null, $this->taxonomy( $slug ) );
 
@@ -37,12 +36,12 @@ class Taxonomy {
 			register_taxonomy_for_object_type( $slug, $post_type );
 		}
 
-		add_filter( 'term_updated_messages', [ $this, 'term_updated_messages' ] );
+		add_filter( 'term_updated_messages', array( $this, 'term_updated_messages' ) );
 
 	}
 
 	private function taxonomy() {
-		return [
+		return array(
 
 			// A short descriptive summary of what the taxonomy is for.
 			'description'        => _x( 'Types is a taxonomy used as post metadata. Its terms describe different types of content. For example, Feature Article, Column, Review and Tutorial.', 'Description', 'kntnt-taxonomy-type' ),
@@ -83,12 +82,12 @@ class Taxonomy {
 			'meta_box_cb'        => false,
 
 			// Array of capabilities for this taxonomy.
-			'capabilities'       => [
+			'capabilities'       => array(
 				'manage_terms' => 'edit_posts',
 				'edit_terms'   => 'edit_posts',
 				'delete_terms' => 'edit_posts',
 				'assign_terms' => 'edit_posts',
-			],
+			),
 
 			// Sets the query var key for this taxonomy. Default $taxonomy key.
 			// If false, a taxonomy cannot be loaded
@@ -98,7 +97,7 @@ class Taxonomy {
 
 			// Triggers the handling of rewrites for this taxonomy.
 			// Replace the array with false to prevent handling of rewrites.
-			'rewrite'            => [
+			'rewrite'            => array(
 
 				// Customize the permastruct slug.
 				'slug'         => 'type',
@@ -115,13 +114,13 @@ class Taxonomy {
 				// permalink_epmask is not set, defaults to EP_PERMALINK.
 				'ep_mask'      => null,
 
-			],
+			),
 
 			// Default term to be used for the taxonomy.
 			'default_term'       => null,
 
 			// An array of labels for this taxonomy.
-			'labels'             => [
+			'labels'             => array(
 				'name'                       => _x( 'Types', 'Plural name', 'kntnt-taxonomy-type' ),
 				'singular_name'              => _x( 'Type', 'Singular name', 'kntnt-taxonomy-type' ),
 				'search_items'               => _x( 'Search types', 'Search items', 'kntnt-taxonomy-type' ),
@@ -143,13 +142,13 @@ class Taxonomy {
 				'items_list'                 => _x( 'Items list', 'Types list', 'kntnt-taxonomy-type' ),
 				'most_used'                  => _x( 'Most used', 'Most used', 'kntnt-taxonomy-type' ),
 				'back_to_items'              => _x( 'Back to types', 'Back to items', 'kntnt-taxonomy-type' ),
-			],
+			),
 
-		];
+		);
 	}
 
 	public function term_updated_messages( $messages ) {
-		$messages['type'] = [
+		$messages['type'] = array(
 			0 => '', // Unused. Messages start at index 1.
 			1 => __( 'Type added.', 'kntnt-taxonomy-type' ),
 			2 => __( 'Type deleted.', 'kntnt-taxonomy-type' ),
@@ -157,7 +156,7 @@ class Taxonomy {
 			4 => __( 'Type not added.', 'kntnt-taxonomy-type' ),
 			5 => __( 'Type not updated.', 'kntnt-taxonomy-type' ),
 			6 => __( 'Types deleted.', 'kntnt-taxonomy-type' ),
-		];
+		);
 
 		return $messages;
 	}
